@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harshitha Chuppa | Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #f0eee8;
+    --muted: #8a8896;
+    --accent: #7c6af5;
+    --accent2: #5dcaa5;
+    --accent3: #f0997b;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(124,106,245,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 70%, rgba(93,202,165,0.08) 0%, transparent 60%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-label::before {
+    content: '';
+    display: block; width: 2rem; height: 1px;
+    background: var(--accent2);
+  }
+  h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.035em;
+    margin-bottom: 1.5rem;
+  }
+  h1 .name-accent { color: var(--accent); }
+  .hero-desc {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 2rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.22s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #6a58e0; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 0.5px solid var(--border2);
+  }
+  .btn-outline:hover { background: var(--surface2); border-color: rgba(255,255,255,0.2); }
+
+  /* STATS PILL */
+  .hero-stats {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    min-width: 130px;
+  }
+  .stat-num {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 5rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-tag::before {
+    content: ''; display: block;
+    width: 1.5rem; height: 1px; background: var(--accent3);
+  }
+  h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  /* SKILLS */
+  .skills-wrap {
+    display: flex; flex-wrap: wrap; gap: 0.75rem;
+  }
+  .skill-pill {
+    padding: 0.5rem 1.1rem;
+    border: 0.5px solid var(--border2);
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .skill-pill:hover { border-color: var(--accent); color: var(--accent); }
+  .skill-pill.highlight {
+    background: rgba(124,106,245,0.1);
+    border-color: rgba(124,106,245,0.3);
+    color: #b8aefc;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .exp-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.5rem 1.75rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem 1.5rem;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+  .exp-card:hover { border-color: var(--border2); }
+  .exp-dot {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; margin-top: 0.15rem;
+    flex-shrink: 0;
+  }
+  .exp-dot.purple { background: rgba(124,106,245,0.15); color: var(--accent); }
+  .exp-dot.teal { background: rgba(93,202,165,0.15); color: var(--accent2); }
+  .exp-company {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  .exp-role { font-size: 0.85rem; color: var(--muted); }
+  .exp-desc { font-size: 0.9rem; color: var(--muted); font-weight: 300; margin-top: 0.5rem; }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    transition: all 0.25s;
+    display: flex; flex-direction: column; gap: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .project-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-icon {
+    width: 44px; height: 44px; border-radius: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .project-card h3 {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .project-card p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-weight: 300;
+    flex: 1;
+  }
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .tag {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 2rem;
+    background: var(--surface2);
+    color: var(--muted);
+    border: 0.5px solid var(--border);
+  }
+
+  /* ACHIEVEMENTS */
+  .ach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .ach-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .ach-card:hover { border-color: var(--border2); }
+  .ach-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .ach-card h4 {
+    font-family: var(--font-head);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+  .ach-card p { font-size: 0.82rem; color: var(--muted); font-weight: 300; }
+
+  /* CERTS */
+  .cert-list {
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .cert-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.9rem 1.25rem;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 0.75rem;
+    transition: border-color 0.2s;
+  }
+  .cert-row:hover { border-color: var(--border2); }
+  .cert-icon { color: var(--accent2); flex-shrink: 0; }
+  .cert-name { font-size: 0.9rem; font-weight: 400; }
+  .cert-issuer { font-size: 0.8rem; color: var(--muted); margin-left: auto; }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .contact-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 0.9rem;
+  }
+  .contact-card:hover { border-color: var(--accent); background: rgba(124,106,245,0.06); }
+  .contact-card .ci { font-size: 1.3rem; }
+  .contact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+  .contact-val { font-size: 0.9rem; font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border-top: 0.5px solid var(--border);
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%; height: 0.5px;
+    background: var(--border);
+    margin: 0 auto;
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
+    section { padding: 3.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">CH<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-label">Full Stack Developer</div>
+      <h1>
+        Chuppa<br>
+        <span class="name-accent">Harshitha</span>
+      </h1>
+      <p class="hero-desc">
+        Enthusiastic CS student specializing in Cyber Security, passionate about building
+        innovative full-stack applications with a keen interest in system performance and reliability.
+      </p>
+      <div class="hero-cta">
+        <a href="mailto:23r11a6211@gcet.edu.in" class="btn btn-primary">Get in touch</a>
+        <a href="https://github.com/Harshitha0108" target="_blank" class="btn btn-outline">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">8.62</div>
+        <div class="stat-label">CGPA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Internships</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag">what i know</div>
+  <h2>Technical skills</h2>
+  <div style="display:flex;flex-direction:column;gap:1.75rem;">
+    <div>
+      <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:0.75rem;">Languages</div>
+      <div class="skills-wrap">
+        <span class="skill-pill highlight">C</span>
+        <span class="skill-pill highlight">Java</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:0.75rem;">Frontend</div>
+      <div class="skills-wrap">
+        <span class="skill-pill highlight">React.js</span>
+        <span class="skill-pill">HTML5</span>
+        <span class="skill-pill">CSS3</span>
+        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">Responsive Design</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:0.75rem;">Backend</div>
+      <div class="skills-wrap">
+        <span class="skill-pill highlight">Node.js</span>
+        <span class="skill-pill highlight">Express.js</span>
+        <span class="skill-pill">REST APIs</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:0.75rem;">Databases</div>
+      <div class="skills-wrap">
+        <span class="skill-pill">MongoDB</span>
+        <span class="skill-pill">MySQL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-tag">where i've worked</div>
+  <h2>Work experience</h2>
+  <div class="exp-list">
+    <div class="exp-card">
+      <div class="exp-dot purple">🚀</div>
+      <div>
+        <div class="exp-company">Prodigy Infotech</div>
+        <div class="exp-role">Web Development Intern</div>
+        <div class="exp-desc">Worked on front-end and back-end projects using HTML, CSS, JavaScript and React.JS, completing hands-on development tasks across the full web stack.</div>
+      </div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-dot teal">💼</div>
+      <div>
+        <div class="exp-company">Skill Dzire</div>
+        <div class="exp-role">Full Stack Intern</div>
+        <div class="exp-desc">Enhanced full-stack skills through real-time projects, focusing on API integration and responsive web design.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-tag">what i've built</div>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon" style="background:rgba(124,106,245,0.12);">📝</div>
+      <h3>Notes Manager</h3>
+      <p>Full stack notes management app to create, save, and delete notes via a responsive user-friendly interface.</p>
+      <div class="project-tags">
+        <span class="tag">Node.js</span>
+        <span class="tag">Express.js</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">HTML/CSS</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon" style="background:rgba(93,202,165,0.12);">🛒</div>
+      <h3>E-Commerce Website</h3>
+      <p>Full-featured e-commerce site with product catalog, add-to-cart functionality, and search option.</p>
+      <div class="project-tags">
+        <span class="tag">HTML/CSS/JS</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Express.js</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-tag">recognition</div>
+  <h2>Achievements</h2>
+  <div class="ach-grid">
+    <div class="ach-card">
+      <div class="ach-icon">🏅</div>
+      <div>
+        <h4>4th Rank — Cybersecurity Dept</h4>
+        <p>Achieved departmental rank with certificate and cash prize in 2nd Year.</p>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">🇮🇳</div>
+      <div>
+        <h4>Smart India Hackathon 2024</h4>
+        <p>Developed a software + smartwatch concept for mental health support during pain attacks.</p>
+      </div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-icon">📋</div>
+      <div>
+        <h4>IEEE WIE Affinity</h4>
+        <p>Participated in poster presentation on "Power of Her Hands".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CERTIFICATES -->
+<section>
+  <div class="section-tag">credentials</div>
+  <h2>Certifications</h2>
+  <div class="cert-list">
+    <div class="cert-row">
+      <span class="cert-icon">✦</span>
+      <span class="cert-name">Java Fundamentals</span>
+      <span class="cert-issuer">Oracle Academy</span>
+    </div>
+    <div class="cert-row">
+      <span class="cert-icon">✦</span>
+      <span class="cert-name">Joy of Computing — Python Programming</span>
+      <span class="cert-issuer">NPTEL</span>
+    </div>
+    <div class="cert-row">
+      <span class="cert-icon">✦</span>
+      <span class="cert-name">Hashgraph Developer Course</span>
+      <span class="cert-issuer">HEDERA</span>
+    </div>
+    <div class="cert-row">
+      <span class="cert-icon">✦</span>
+      <span class="cert-name">Blockchain Bootcamp</span>
+      <span class="cert-issuer">IDS</span>
+    </div>
+    <div class="cert-row">
+      <span class="cert-icon">✦</span>
+      <span class="cert-name">CLP: Programming Essentials</span>
+      <span class="cert-issuer">Cisco Network Academy</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">get in touch</div>
+  <h2>Contact</h2>
+  <div class="contact-grid">
+    <a href="mailto:23r11a6211@gcet.edu.in" class="contact-card">
+      <span class="ci">✉️</span>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-val">23r11a6211@gcet.edu.in</div>
+      </div>
+    </a>
+    <a href="tel:9059811177" class="contact-card">
+      <span class="ci">📞</span>
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-val">+91 9059811177</div>
+      </div>
+    </a>
+    <a href="https://github.com/Harshitha0108" target="_blank" class="contact-card">
+      <span class="ci">🐙</span>
+      <div>
+        <div class="contact-label">GitHub</div>
+        <div class="contact-val">Harshitha0108</div>
+      </div>
+    </a>
+    <a href="https://www.linkedin.com/in/harshitha-chuppa" target="_blank" class="contact-card">
+      <span class="ci">💼</span>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-val">Harshitha Chuppa</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  Crafted by Chuppa Harshitha &nbsp;·&nbsp; B.Tech CSE (Cyber Security) · GCET Keesara · 2023–2027
+</footer>
+
+</body>
+</html>
